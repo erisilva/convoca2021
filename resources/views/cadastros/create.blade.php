@@ -39,7 +39,7 @@
           <p><strong>Decreto Municipal nº 151/2017 (atualizado)</strong>: Art. 2º, caput, incisos e parágrafos –requisitos; Art. 6º caput, incisos e parágrafos – formalização;</p>
           <p><strong>COMUNICA</strong> ainda que, em virtude das restrições sanitárias impostas pela Pandemia do COVID-19, nos termos do Decreto Municipal nº 058/2021, o protocolo da manifestação de interesse e da respectiva documentação de qualificação deverá, preferencialmente, ser formalizado em via eletrônica, através deste formulário web.</p>
           <p>Comparecimento presencial para protocolo deverá ocorrer apenas se não for possível a solução pela via eletrônica, obedecendo-se às normas sanitárias de prevenção da COVID-19, exclusivamente na Sede da Secretaria Municipal de Saúde, à Avenida General David Sarnoff, nº 3.113, bairro Cidade Industrial. Contagem - MG - CEP 32.210-110.</p>
-          <p>Telefone: 3472-6315 / 6316 / 6317 / 6318 / 6319 / 6320 E-mail: saude@contagem.mg.gov.br Site: <a href="www.contagem.mg.gov.br/sms/" target="_blank">www.contagem.mg.gov.br/sms/</a> Horário de Funcionamento: 8:00 às 17:00 horas</p>
+          <p>Telefone: 3472-6315 / 6316 / 6317 / 6318 / 6319 / 6320 E-mail: saude@contagem.mg.gov.br Site: <a href="http://www.contagem.mg.gov.br/sms/" target="_blank">www.contagem.mg.gov.br/sms/</a> Horário de Funcionamento: 8:00 às 17:00 horas</p>
         </div>
       </div>
     </div>
@@ -215,7 +215,7 @@
         <ul class="list-group">
           <li class="list-group-item">
             <label for="arquivos">Arquivo #1 <strong  class="text-danger">(*)</strong></label>
-            <input type="file" class="form-control-file  {{ $errors->has('arquivos') ? ' is-invalid' : '' }}" id="arquivos" name="arquivos[]" multiple data-show-upload="true" data-show-caption="true">
+            <input type="file" class="form-control-file {{ $errors->has('arquivos') ? ' is-invalid' : '' }}" id="arquivos" name="arquivos[]" multiple data-show-upload="true" data-show-caption="true">
             @if ($errors->has('arquivos'))
             <div class="invalid-feedback">
             {{ $errors->first('arquivos') }}
