@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('curriculo.index') }}">Lista de Currículos</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('curriculo.index') }}">Lista de Cadastros</a></li>
     </ol>
   </nav>
   @if(Session::has('deleted_cargo'))
@@ -41,9 +41,9 @@
                 <th scope="col">Cód.</th>
                 <th scope="col">Data</th>
                 <th scope="col">Hora</th>
-                <th scope="col">Nome</th>
-                <th scope="col">CPF</th>
-                <th scope="col">Função</th>
+                <th scope="col">Entidade</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">Representante</th>
                 <th scope="col">Celular</th>
                 <th scope="col">E-mail</th>
                 <th scope="col"></th>
@@ -55,9 +55,9 @@
                 <td>{{$curriculo->id}}</td>
                 <td>{{ $curriculo->created_at->format('d/m/Y') }}</td>
                 <td>{{ $curriculo->created_at->format('H:i') }}</td>
-                <td>{{ $curriculo->nome }}</td>
-                <td>{{ $curriculo->cpf }}</td>
-                <td>{{ $curriculo->funcao->descricao }}</td>
+                <td>{{ $curriculo->entidade }}</td>
+                <td>{{ $curriculo->cnpj }}</td>
+                <td>{{ $curriculo->representante }}</td>
                 <td>{{ $curriculo->cel1 }}</td>
                 <td>{{ $curriculo->email }}</td>
                 <td>
@@ -93,19 +93,9 @@
                 <input type="text" class="form-control" id="codigo" name="codigo" value="{{request()->input('codigo')}}">
               </div>
               <div class="form-group col-md-8">
-                <label for="nome">Nome do Candidato</label>
-                <input type="text" class="form-control" id="nome" name="nome" value="{{request()->input('nome')}}">
+                <label for="entidade">Nome da Entidade</label>
+                <input type="text" class="form-control" id="entidade" name="entidade" value="{{request()->input('entidade')}}">
               </div>
-            </div>
-
-            <div class="form-group">
-              <label for="funcao_id">Função</label>
-              <select class="form-control" name="funcao_id" id="funcao_id">
-                <option value="">Mostrar todos</option>    
-                @foreach($funcoes as $funcao)
-                <option value="{{$funcao->id}}" {{ ($funcao->id == request()->input('funcao_id')) ? ' selected' : '' }} >{{$funcao->descricao}}</option>
-                @endforeach
-              </select>
             </div>
 
             <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Pesquisar</button>

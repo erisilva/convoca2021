@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Curriculo;
+use App\Anexo;
 use App\Funcao;
 use App\Formacao;
 
@@ -61,16 +62,10 @@ $curriculos = new Curriculo;
             }
         }
 
-        if (request()->has('nome')){
-            $curriculos = $curriculos->where('nome', 'like', '%' . request('nome') . '%');
+        if (request()->has('entidade')){
+            $curriculos = $curriculos->where('entidade', 'like', '%' . request('entidade') . '%');
         }
 
-
-        if (request()->has('funcao_id')){
-            if (request('funcao_id') != ""){
-                $curriculos = $curriculos->where('funcao_id', '=', request('funcao_id'));
-            }
-        } 
 
         // ordena
         $curriculos = $curriculos->orderBy('id', 'desc');
@@ -88,14 +83,11 @@ $curriculos = new Curriculo;
         // paginação
         $curriculos = $curriculos->paginate(session('perPage', '5'))->appends([          
             'codigo' => request('codigo'),
-            'nome' => request('nome'),
-            'funcao_id' => request('funcao_id'),     
+            'entidade' => request('entidade'),    
             ]);
 
-        // consulta a tabela dos cargos
-        $funcoes = Funcao::orderBy('id', 'asc')->get();
 
-        return view('curriculos.index', compact('curriculos', 'perpages', 'funcoes'));
+        return view('curriculos.index', compact('curriculos', 'perpages'));
     }
 
    
@@ -109,7 +101,9 @@ $curriculos = new Curriculo;
     {
         $curriculo = Curriculo::findOrFail($id);
 
-        return view('curriculos.show', compact('curriculo'));
+        $anexos = Anexo::where('curriculo_id', '=', $id)->orderBy('id', 'asc')->get();
+
+        return view('curriculos.show', compact('curriculo', 'anexos'));
     }
 
         /**
@@ -123,8 +117,8 @@ $curriculos = new Curriculo;
 
        $headers = [
                 'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
-            ,   'Content-type'        => 'text/csv'
-            ,   'Content-Disposition' => 'attachment; filename=Curriculos_' .  date("Y-m-d H:i:s") . '.csv'
+            ,   'Content-type'        => 'text/csv; charset=UTF-8'
+            ,   'Content-Disposition' => 'attachment; filename=cadastros_' .  date("Y-m-d H:i:s") . '.csv'
             ,   'Expires'             => '0'
             ,   'Pragma'              => 'public'
         ];
@@ -132,23 +126,15 @@ $curriculos = new Curriculo;
         $curriculos = DB::table('curriculos');
 
         //joins
-        $curriculos = $curriculos->join('funcaos', 'funcaos.id', '=', 'curriculos.funcao_id');
-        $curriculos = $curriculos->join('formacaos', 'formacaos.id', '=', 'curriculos.formacao_id');
 
         $curriculos = $curriculos->select(
             'curriculos.id as codigo', 
             DB::raw('DATE_FORMAT(curriculos.created_at, \'%d/%m/%Y\') AS data_cadastro'), 
             DB::raw('DATE_FORMAT(curriculos.created_at, \'%H:%i\') AS hora_cadastro'),
-            'curriculos.nome',
-            DB::raw('IF(curriculos.usarNomeSocial=\'s\', \'Sim\', \'Não\') as usarNomeSocial'),
-            'curriculos.nomeSocial',
-            DB::raw('DATE_FORMAT(curriculos.nascimento, \'%d/%m/%Y\') AS data_nascimento'),
+            'curriculos.entidade',
+            'curriculos.cnpj',
+            'curriculos.representante',
             'curriculos.cpf',
-            'curriculos.rg',
-            'curriculos.nacionalidade',
-            DB::raw('IF(curriculos.negro=\'s\', \'Sim\', \'Não\') as NegroPardo'),
-            DB::raw('IF(curriculos.deficiente=\'s\', \'Sim\', \'Não\') as Deficiente'),
-            'funcaos.descricao as funcao',
             'curriculos.email',
             'curriculos.cel1',
             'curriculos.cel2',
@@ -159,10 +145,7 @@ $curriculos = new Curriculo;
             'curriculos.bairro',
             'curriculos.cidade',
             'curriculos.uf',
-            'formacaos.descricao as formacao',
-            'curriculos.registro',        
-
-            DB::raw('IF(curriculos.deficiente=\'s\', \'Sim\', \'Não\') as Deficiente'),
+       
 
         );
 
@@ -172,8 +155,8 @@ $curriculos = new Curriculo;
             }
         }
 
-        if (request()->has('nome')){
-            $curriculos = $curriculos->where('curriculos.nome', 'like', '%' . request('nome') . '%');
+        if (request()->has('entidade')){
+            $curriculos = $curriculos->where('curriculos.entidade', 'like', '%' . request('entidade') . '%');
         }
 
         if (request()->has('funcao_id')){
@@ -197,7 +180,7 @@ $curriculos = new Curriculo;
             $FH = fopen('php://output', 'w');
             fputs($FH, $bom = ( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
             foreach ($list as $row) {
-                fputcsv($FH, $row, chr(9));
+                fputcsv($FH, $row, chr(59));
             }
             fclose($FH);
         };

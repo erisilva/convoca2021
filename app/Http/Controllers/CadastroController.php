@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Curriculo;
+use App\Anexo;
 use App\Funcao;
 use App\Formacao;
 
@@ -54,18 +55,23 @@ class CadastroController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nome' => 'required',
-            'cpf' => 'required',
-            'cpf' => new Cpf,
+            'entidade' => 'required',
+            'cnpj' => 'required',
 
             'email' => 'required',
             'cel1' => 'required',
+
             'cep' => 'required',
             'logradouro' => 'required',
             'numero' => 'required',
             'bairro' => 'required',
             'cidade' => 'required',
             'uf' => 'required',
+
+
+            'representante' => 'required',    
+            'cpf' => 'required',
+            'cpf' => new Cpf,
 
            
             'declaro1' => 'required',
@@ -74,13 +80,14 @@ class CadastroController extends Controller
 
         ],
         [
-            'nome.required' => 'O nome do candidato é obrigatório',
+            'entidade.required' => 'O nome da entidade é obrigatório',
+            'cnpj.required' => 'O CNPJ da entidade é obrigatório',
 
+            'representante.required' => 'O nome do representante é obrigatório',
             'cpf.required' => 'O CPF do candidato é obrigatório',
 
             'email.required' => 'O e-mail do candidato é obrigatório',
             'cel1.required' => 'É obrigatório digitar um número de celular para contato',
-
 
 
             'declaro1.required' => 'Você precisa aceitar as condições exigidas de acordo com o edital clicando na caixa acima',
@@ -103,31 +110,49 @@ class CadastroController extends Controller
         // ajusta no nome e cpf para que seja usado no nome do arquivo
         $nome = str_replace(' ', '-', $input['entidade']);
         $nome = preg_replace('/[^A-Za-z0-9\-]/', '', $nome);
-        $cpf = preg_replace('/[^0-9]/', '', $input['cpf']);
+        $cnpj = preg_replace('/[^0-9]/', '', $input['cnpj']);
 
-        $local = generateRandomString(20);
-        if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {            
-            $nome_arquivo =  $nome . '-' . $cpf . '-experiencia.' . $request->arquivo->extension();
-            $path = $request->file('arquivo')->storeAs($local, $nome_arquivo, 'public');
-            $url = asset('storage/' . $local . '/' . $nome_arquivo);            
-            $input['arquivo1Nome'] =  $nome_arquivo;  
-            $input['arquivo1Local'] =  $local;  
-            $input['arquivo1Url'] =  $url;
-        }
+        // $local = generateRandomString(20);
+        // if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {            
+        //     $nome_arquivo =  $nome . '-' . $cnpj . '-experiencia.' . $request->arquivo->extension();
+        //     $path = $request->file('arquivo')->storeAs($local, $nome_arquivo, 'public');
+        //     $url = asset('storage/' . $local . '/' . $nome_arquivo);            
+        //     $input['arquivo1Nome'] =  $nome_arquivo;  
+        //     $input['arquivo1Local'] =  $local;  
+        //     $input['arquivo1Url'] =  $url;
+        // }
 
-        /*
 
-$files = $request->file('attachment');
 
-if($request->hasFile('attachment'))
-{
-    foreach ($files as $file) {
-        $file->store('users/' . $this->user->id . '/messages');
-    }
-}
-        */
+        
 
         $newcurriculo = Curriculo::create($input); //salva
+
+        if($request->hasFile('arquivos'))
+        {
+            $files = $request->file('arquivos');
+
+            $count = 1;
+            foreach ($files as $file) {
+                //$file->store('users/' . $this->user->id . '/messages');
+                $local = generateRandomString(20);
+                $nome_arquivo =  $nome . '-' . $cnpj . '-' . $count . '.' . $file->extension();
+                $path = $file->storeAs($local, $nome_arquivo, 'public');
+                $url = asset('storage/' . $local . '/' . $nome_arquivo);
+
+                $temp = new Anexo;
+
+                $temp->curriculo_id = $newcurriculo->id;
+                $temp->arquivoNome =  $nome_arquivo;  
+                $temp->arquivoLocal =  $local;  
+                $temp->arquivoUrl =  $url;
+
+                $temp->save();
+
+                $count = $count + 1;
+            }
+        }
+        
 
         return view('cadastros.recibo', compact('newcurriculo'));
     }

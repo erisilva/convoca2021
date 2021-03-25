@@ -204,9 +204,9 @@
 
       <div class="form-group">
           <div class="alert alert-warning" role="alert">
-            <p><strong  class="text-danger">(!)</strong> Só serão aceitos os arquivos no formato PDF</p>
+            <p><strong  class="text-danger">(!)</strong> Só serão aceitos os arquivos nos seguintes formatos: pdf, doc, rtf, txt, jpg, jpeg ou png </p>
             <p><strong  class="text-danger">(!)</strong> Cada arquivo a ser enviado não pode ter mais de <strong>5MB</strong> de espaço cada um</p>
-            <p><strong  class="text-danger">(!)</strong> Pode ser enviado apenas um arquivo ou vários arquivos</p>
+            <p><strong  class="text-danger">(!)</strong> Pode ser enviado apenas um arquivo ou vários arquivos, para isso basta selecionar quais arquivos deverão ser enviados na caixa de seleção</p>
           </div>       
       </div>
 

@@ -13,17 +13,11 @@ class Curriculo extends Model
 
         'representante', 'cpf', 'email', 'cel1', 'cel2',
 
-        'arquivo1Nome', 'arquivo1Local', 'arquivo1Url', 
-        'arquivo2Nome', 'arquivo2Local', 'arquivo2Url', 
-        'arquivo3Nome', 'arquivo3Local', 'arquivo3Url', 
-        'arquivo4Nome', 'arquivo4Local', 'arquivo4Url', 
-        'arquivo5Nome', 'arquivo5Local', 'arquivo5Url', 
-        'arquivo6Nome', 'arquivo6Local', 'arquivo6Url',
     ];
 
     protected $dates = ['created_at'];
 
-public function anexo()
+public function anexos()
     {
         return $this->belongsTo('App\Anexo');
     }

@@ -36,7 +36,7 @@
                 @if (!Auth::guest())
                 <ul class="navbar-nav mr-auto">                    
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('curriculo.index') }}">Currículos</a>
+                        <a class="nav-link" href="{{ route('curriculo.index') }}">Cadastros</a>
                     </li>
 
                     <li class="nav-item dropdown">

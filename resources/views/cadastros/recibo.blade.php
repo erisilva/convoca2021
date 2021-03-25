@@ -15,11 +15,12 @@
           </div>  
         </div>
         <div class="col-md-8">
-          <h3>Prefeitura Municipal de Contagem</h3>
-          <h4>Secretaria Municipal de Saúde</h4>
-          <p class="lead">Edital de Chamamento Público</p>
-          <hr class="my-4">
-          <p>Processo Seletivo Simplificado</p>
+            <h3>Prefeitura Municipal de Contagem</h3>
+            <h4>Secretaria Municipal de Saúde</h4>
+            <p class="lead">Convocação de Entidades de Saúde para Qualificação como Organizações Sociais de Saúde</p>
+            <hr class="my-4">
+            <p>Gestão de Equipamentos de Saúde Sus</p>
+            <p>Unidades de Pronto Atendimento de Hospitais</p>
         </div>
       </div>
     </div>
@@ -29,9 +30,11 @@
     <h1>Sua inscrição foi recebida com sucesso.</h1>
     <h2>Número da inscrição <strong>{{ $newcurriculo->id }}</strong></h2>
     <hr class="my-4">
-    <p class="lead">Nome: {{ $newcurriculo->nome }}</p>
-    <p class="lead">CPF: {{ $newcurriculo->cpf }} RG: {{ $newcurriculo->rg }}</p>
-    <h3>Função: {{ $newcurriculo->funcao->descricao }}</h3>  
+    <p class="lead">Entidade: {{ $newcurriculo->entidade }}</p>
+    <p class="lead">CNPJ: {{ $newcurriculo->cnpj }}</p>
+    <hr class="my-4">
+    <h3>Representante: {{ $newcurriculo->representante }}</h3>
+    <hr class="my-4"> 
   </div>
 
   <div class="container">
