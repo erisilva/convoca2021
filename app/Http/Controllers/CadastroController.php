@@ -70,24 +70,24 @@ class CadastroController extends Controller
            
             'declaro1' => 'required',
 
-            'arquivo1' => 'required|mimes:pdf,doc,rtf,txt|max:5120',
+            'arquivo.*' => 'required|mimes:pdf,doc,rtf,txt,jpg,jpeg,png|max:5120',
 
         ],
         [
             'nome.required' => 'O nome do candidato é obrigatório',
-            'nascimento.required' => 'A data de nascimento do candidato é obrigatória',
+
             'cpf.required' => 'O CPF do candidato é obrigatório',
-            'rg.required' => 'O RG do candidato é obrigatório',
-            'nacionalidade.required' => 'A nacionalidade do candidato é obrigatório',
+
             'email.required' => 'O e-mail do candidato é obrigatório',
             'cel1.required' => 'É obrigatório digitar um número de celular para contato',
-            'registro.required' => 'É obrigatório digitar o registro de classe',
+
 
 
             'declaro1.required' => 'Você precisa aceitar as condições exigidas de acordo com o edital clicando na caixa acima',
 
-            'arquivo1.required' => 'Esse anexo é requerido para essa inscrição',
-            'arquivo1.mimes' => 'O arquivo anexado deve ser das seguintes extensões: pdf',
+            'arquivo.*.required' => 'Esse anexo é requerido para essa inscrição',
+            'arquivo.*.mimes' => 'O arquivo anexado deve ser das seguintes extensões: pdf',
+            'arquivo.*.max' => 'O arquivo anexado não pode ter mais de 5MB',
         ]);
 
 
@@ -101,7 +101,7 @@ class CadastroController extends Controller
 
 
         // ajusta no nome e cpf para que seja usado no nome do arquivo
-        $nome = str_replace(' ', '-', $input['nome']);
+        $nome = str_replace(' ', '-', $input['entidade']);
         $nome = preg_replace('/[^A-Za-z0-9\-]/', '', $nome);
         $cpf = preg_replace('/[^0-9]/', '', $input['cpf']);
 
@@ -114,6 +114,18 @@ class CadastroController extends Controller
             $input['arquivo1Local'] =  $local;  
             $input['arquivo1Url'] =  $url;
         }
+
+        /*
+
+$files = $request->file('attachment');
+
+if($request->hasFile('attachment'))
+{
+    foreach ($files as $file) {
+        $file->store('users/' . $this->user->id . '/messages');
+    }
+}
+        */
 
         $newcurriculo = Curriculo::create($input); //salva
 
