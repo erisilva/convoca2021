@@ -23,6 +23,9 @@ class Curriculo extends Model
 
     protected $dates = ['created_at'];
 
-
+public function anexo()
+    {
+        return $this->belongsTo('App\Anexo');
+    }
 
 }

@@ -43,30 +43,30 @@ class CreateCurriculosTable extends Migration
 
 
 
-            // anexos
-            $table->string('arquivo1Nome'); // nome do arquivo
-            $table->string('arquivo1Local'); // pasta onde será salvo o arquivo
-            $table->text('arquivo1Url'); // url completa do arquivo
+            // // anexos
+            // $table->string('arquivo1Nome'); // nome do arquivo
+            // $table->string('arquivo1Local'); // pasta onde será salvo o arquivo
+            // $table->text('arquivo1Url'); // url completa do arquivo
 
-            $table->string('arquivo2Nome')->nullable(); // nome do arquivo
-            $table->string('arquivo2Local')->nullable(); // pasta onde será salvo o arquivo
-            $table->text('arquivo2Url')->nullable(); // url completa do arquivo
+            // $table->string('arquivo2Nome')->nullable(); // nome do arquivo
+            // $table->string('arquivo2Local')->nullable(); // pasta onde será salvo o arquivo
+            // $table->text('arquivo2Url')->nullable(); // url completa do arquivo
 
-            $table->string('arquivo3Nome')->nullable(); // nome do arquivo
-            $table->string('arquivo3Local')->nullable(); // pasta onde será salvo o arquivo
-            $table->text('arquivo3Url')->nullable(); // url completa do arquivo
+            // $table->string('arquivo3Nome')->nullable(); // nome do arquivo
+            // $table->string('arquivo3Local')->nullable(); // pasta onde será salvo o arquivo
+            // $table->text('arquivo3Url')->nullable(); // url completa do arquivo
 
-            $table->string('arquivo4Nome')->nullable(); // nome do arquivo
-            $table->string('arquivo4Local')->nullable(); // pasta onde será salvo o arquivo
-            $table->text('arquivo4Url')->nullable(); // url completa do arquivo
+            // $table->string('arquivo4Nome')->nullable(); // nome do arquivo
+            // $table->string('arquivo4Local')->nullable(); // pasta onde será salvo o arquivo
+            // $table->text('arquivo4Url')->nullable(); // url completa do arquivo
 
-            $table->string('arquivo5Nome')->nullable(); // nome do arquivo
-            $table->string('arquivo5Local')->nullable(); // pasta onde será salvo o arquivo
-            $table->text('arquivo5Url')->nullable(); // url completa do arquivo
+            // $table->string('arquivo5Nome')->nullable(); // nome do arquivo
+            // $table->string('arquivo5Local')->nullable(); // pasta onde será salvo o arquivo
+            // $table->text('arquivo5Url')->nullable(); // url completa do arquivo
 
-            $table->string('arquivo6Nome')->nullable(); // nome do arquivo
-            $table->string('arquivo6Local')->nullable(); // pasta onde será salvo o arquivo
-            $table->text('arquivo6Url')->nullable(); // url completa do arquivo
+            // $table->string('arquivo6Nome')->nullable(); // nome do arquivo
+            // $table->string('arquivo6Local')->nullable(); // pasta onde será salvo o arquivo
+            // $table->text('arquivo6Url')->nullable(); // url completa do arquivo
 
 
             $table->timestamps();

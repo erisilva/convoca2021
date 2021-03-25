@@ -71,11 +71,6 @@ class CadastroController extends Controller
             'declaro1' => 'required',
 
             'arquivo1' => 'required|mimes:pdf,doc,rtf,txt|max:5120',
-            'arquivo2' => 'required|mimes:pdf,doc,rtf,txt|max:5120',
-            'arquivo3' => 'required|mimes:pdf,doc,rtf,txt|max:5120',
-            'arquivo4' => 'required|mimes:pdf,doc,rtf,txt|max:5120',
-            'arquivo5' => 'required|mimes:pdf,doc,rtf,txt|max:5120',
-            'arquivo6' => 'required|mimes:pdf,doc,rtf,txt|max:5120',
 
         ],
         [
@@ -87,25 +82,12 @@ class CadastroController extends Controller
             'email.required' => 'O e-mail do candidato é obrigatório',
             'cel1.required' => 'É obrigatório digitar um número de celular para contato',
             'registro.required' => 'É obrigatório digitar o registro de classe',
-            'funcao_id.required' => 'Selecione a função na lista',
-            'formacao_id.required' => 'Selecione a formação na lista',
 
 
             'declaro1.required' => 'Você precisa aceitar as condições exigidas de acordo com o edital clicando na caixa acima',
 
             'arquivo1.required' => 'Esse anexo é requerido para essa inscrição',
             'arquivo1.mimes' => 'O arquivo anexado deve ser das seguintes extensões: pdf',
-            'arquivo1.max' => 'O arquivo anexado não pode ter mais de 5MB',
-            'arquivo2.mimes' => 'O arquivo anexado deve ser das seguintes extensões: pdf',
-            'arquivo2.max' => 'O arquivo anexado não pode ter mais de 5MB',
-            'arquivo3.mimes' => 'O arquivo anexado deve ser das seguintes extensões: pdf',
-            'arquivo3.max' => 'O arquivo anexado não pode ter mais de 5MB',
-            'arquivo4.mimes' => 'O arquivo anexado deve ser das seguintes extensões: pdf',
-            'arquivo4.max' => 'O arquivo anexado não pode ter mais de 5MB',
-            'arquivo5.mimes' => 'O arquivo anexado deve ser das seguintes extensões: pdf',
-            'arquivo5.max' => 'O arquivo anexado não pode ter mais de 5MB',
-            'arquivo6.mimes' => 'O arquivo anexado deve ser das seguintes extensões: pdf',
-            'arquivo6.max' => 'O arquivo anexado não pode ter mais de 5MB',
         ]);
 
 
@@ -131,56 +113,6 @@ class CadastroController extends Controller
             $input['arquivo1Nome'] =  $nome_arquivo;  
             $input['arquivo1Local'] =  $local;  
             $input['arquivo1Url'] =  $url;
-        }
-
-        $local = generateRandomString(20);
-        if ($request->hasFile('arquivo2') && $request->file('arquivo2')->isValid()) {            
-            $nome_arquivo =  $nome . '-' . $cpf . '-especializacao.' . $request->arquivo2->extension();
-            $path = $request->file('arquivo2')->storeAs($local, $nome_arquivo, 'public');
-            $url = asset('storage/' . $local . '/' . $nome_arquivo);            
-            $input['arquivo2Nome'] =  $nome_arquivo;  
-            $input['arquivo2Local'] =  $local;  
-            $input['arquivo2Url'] =  $url;
-        }
-
-        $local = generateRandomString(20);
-        if ($request->hasFile('arquivo3') && $request->file('arquivo3')->isValid()) {            
-            $nome_arquivo =  $nome . '-' . $cpf . '-mestrado.' . $request->arquivo3->extension();
-            $path = $request->file('arquivo3')->storeAs($local, $nome_arquivo, 'public');
-            $url = asset('storage/' . $local . '/' . $nome_arquivo);            
-            $input['arquivo3Nome'] =  $nome_arquivo;  
-            $input['arquivo3Local'] =  $local;  
-            $input['arquivo3Url'] =  $url;
-        }
-
-        $local = generateRandomString(20);
-        if ($request->hasFile('arquivo4') && $request->file('arquivo4')->isValid()) {            
-            $nome_arquivo =  $nome . '-' . $cpf . '-doutorado.' . $request->arquivo4->extension();
-            $path = $request->file('arquivo4')->storeAs($local, $nome_arquivo, 'public');
-            $url = asset('storage/' . $local . '/' . $nome_arquivo);            
-            $input['arquivo4Nome'] =  $nome_arquivo;  
-            $input['arquivo4Local'] =  $local;  
-            $input['arquivo4Url'] =  $url;
-        }
-
-        $local = generateRandomString(20);
-        if ($request->hasFile('arquivo5') && $request->file('arquivo5')->isValid()) {            
-            $nome_arquivo =  $nome . '-' . $cpf . '-preceptoria.' . $request->arquivo5->extension();
-            $path = $request->file('arquivo5')->storeAs($local, $nome_arquivo, 'public');
-            $url = asset('storage/' . $local . '/' . $nome_arquivo);            
-            $input['arquivo5Nome'] =  $nome_arquivo;  
-            $input['arquivo5Local'] =  $local;  
-            $input['arquivo5Url'] =  $url;
-        }
-
-        $local = generateRandomString(20);
-        if ($request->hasFile('arquivo6') && $request->file('arquivo6')->isValid()) {            
-            $nome_arquivo =  $nome . '-' . $cpf . '-academica.' . $request->arquivo6->extension();
-            $path = $request->file('arquivo6')->storeAs($local, $nome_arquivo, 'public');
-            $url = asset('storage/' . $local . '/' . $nome_arquivo);            
-            $input['arquivo6Nome'] =  $nome_arquivo;  
-            $input['arquivo6Local'] =  $local;  
-            $input['arquivo6Url'] =  $url;
         }
 
         $newcurriculo = Curriculo::create($input); //salva

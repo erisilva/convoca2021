@@ -17,31 +17,45 @@
           <div class="col-md-8">
             <h3>Prefeitura Municipal de Contagem</h3>
             <h4>Secretaria Municipal de Saúde</h4>
-            <p class="lead">Edital de Chamamento Público</p>
+            <p class="lead">Convocação de Entidades de Saúde para Qualificação como Organizações Sociais de Saúde</p>
             <hr class="my-4">
-            <p>Processo Seletivo Simplificado</p>
+            <p>Gestão de Equipamentos de Saúde Sus</p>
+            <p>Unidades de Pronto Atendimento de Hospitais</p>
           </div>
         </div>
       </div>
     </div>
-    @if(Session::has('create_curriculo'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <div class="text-center py-5">
-        <h2>{{ session('create_curriculo') }}</h2>
-        <hr class="my-4">
-        <p class="lead">Obrigado por cadastrar seu currículo, em breve entraremos em contato</p>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <p>Em complemento à <strong>CONVOCAÇÃO</strong>, desde logo informa-se que os <strong>requisitos legais</strong> para obter a titulação municipal de ORGANIZAÇÃO SOCIAL estão dispostos na <strong>Lei Municipal nº 4.713/2014</strong> e respectivo regulamento, <strong>Decreto Municipal nº 151/2017</strong> (com alterações promovidas pelo Decreto Municipal nº 239/2017), disponíveis em:</p>
+          <p><ul class="list-group">
+              <li class="list-group-item"><a href="http://www.contagem.mg.gov.br/?legislacao=380131" target="_blank">Lei Municipal nº 4.713/2014</a></li>
+              <li class="list-group-item"><a href="http://www.contagem.mg.gov.br/?legislacao=728667" target="_blank">Decreto Municipal nº 151/2017</a></li>
+          </ul></p>
+          <h4>Principais dispositivos:</h4>
+          <p><strong>Lei Municipal nº 4.713/2014</strong>: Art. 2º, I, incisos “a” até “j”, c/c §1º; Art. 2º, §2º; Art. 4º; Art. 10, caput e parágrafos.</p>
+          <p><strong>Decreto Municipal nº 151/2017 (atualizado)</strong>: Art. 2º, caput, incisos e parágrafos –requisitos; Art. 6º caput, incisos e parágrafos – formalização;</p>
+          <p><strong>COMUNICA</strong> ainda que, em virtude das restrições sanitárias impostas pela Pandemia do COVID-19, nos termos do Decreto Municipal nº 058/2021, o protocolo da manifestação de interesse e da respectiva documentação de qualificação deverá, preferencialmente, ser formalizado em via eletrônica, através deste formulário web.</p>
+          <p>Comparecimento presencial para protocolo deverá ocorrer apenas se não for possível a solução pela via eletrônica, obedecendo-se às normas sanitárias de prevenção da COVID-19, exclusivamente na Sede da Secretaria Municipal de Saúde, à Avenida General David Sarnoff, nº 3.113, bairro Cidade Industrial. Contagem - MG - CEP 32.210-110.</p>
+          <p>Telefone: 3472-6315 / 6316 / 6317 / 6318 / 6319 / 6320 E-mail: saude@contagem.mg.gov.br Site: <a href="www.contagem.mg.gov.br/sms/" target="_blank">www.contagem.mg.gov.br/sms/</a> Horário de Funcionamento: 8:00 às 17:00 horas</p>
+        </div>
       </div>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
     </div>
-    @endif
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Atenção!</strong> Todos campos marcados com <strong>*</strong> são de preenchimento obrigatório.
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <br>
+    <div class="container">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Atenção!</strong> Todos campos marcados com <strong>*</strong> são de preenchimento obrigatório.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     </div>
+
+    
+
+
     <div class="container">
       <form method="POST" action="{{ route('cadastro.store') }}" enctype="multipart/form-data">
       @csrf
@@ -58,7 +72,7 @@
         </div>
         <div class="form-group col-md-4">
           <label for="cnpj">CNPJ da Entidade<strong  class="text-danger">(*)</strong></label>
-          <input type="text" class="form-control{{ $errors->has('cnpj') ? ' is-invalid' : '' }}" name="cnpj" id="cpf" value="{{ old('cnpj') ?? '' }}">
+          <input type="text" class="form-control{{ $errors->has('cnpj') ? ' is-invalid' : '' }}" name="cnpj" id="cnpj" value="{{ old('cnpj') ?? '' }}">
           @if ($errors->has('cnpj'))
           <div class="invalid-feedback">
           {{ $errors->first('cnpj') }}
@@ -191,8 +205,8 @@
       <div class="form-group">
           <div class="alert alert-warning" role="alert">
             <p><strong  class="text-danger">(!)</strong> Só serão aceitos os arquivos no formato PDF</p>
-            <p><strong  class="text-danger">(!)</strong> O arquivo não pode ter mais de <strong>5MB</strong></p>
-            <p><strong  class="text-danger">(!)</strong> Anexar frente e verso de todos documentos em um único arquivo</p>
+            <p><strong  class="text-danger">(!)</strong> Cada arquivo a ser enviado não pode ter mais de <strong>5MB</strong> de espaço cada um</p>
+            <p><strong  class="text-danger">(!)</strong> Pode ser enviado apenas um arquivo ou vários arquivos</p>
           </div>       
       </div>
 
@@ -200,56 +214,11 @@
       <div class="form-group">
         <ul class="list-group">
           <li class="list-group-item">
-            <label for="arquivo1">Arquivo #1 <strong  class="text-danger">(*)</strong></label>
-            <input type="file" class="form-control-file  {{ $errors->has('arquivo1') ? ' is-invalid' : '' }}" id="arquivo1" name="arquivo1">
-            @if ($errors->has('arquivo1'))
+            <label for="arquivos">Arquivo #1 <strong  class="text-danger">(*)</strong></label>
+            <input type="file" class="form-control-file  {{ $errors->has('arquivos') ? ' is-invalid' : '' }}" id="arquivos" name="arquivos[]" multiple data-show-upload="true" data-show-caption="true">
+            @if ($errors->has('arquivos'))
             <div class="invalid-feedback">
-            {{ $errors->first('arquivo1') }}
-            </div>
-            @endif
-          </li>
-          <li class="list-group-item">
-            <label for="arquivo2">Arquivo #2 <strong  class="text-danger">(*)</strong></label>
-            <input type="file" class="form-control-file  {{ $errors->has('arquivo2') ? ' is-invalid' : '' }}" id="arquivo2" name="arquivo2">
-            @if ($errors->has('arquivo2'))
-            <div class="invalid-feedback">
-            {{ $errors->first('arquivo2') }}
-            </div>
-            @endif
-          </li>
-          <li class="list-group-item">
-            <label for="arquivo3">Arquivo #3 <strong  class="text-danger">(*)</strong></label>
-            <input type="file" class="form-control-file  {{ $errors->has('arquivo3') ? ' is-invalid' : '' }}" id="arquivo3" name="arquivo3">
-            @if ($errors->has('arquivo3'))
-            <div class="invalid-feedback">
-            {{ $errors->first('arquivo3') }}
-            </div>
-            @endif
-          </li>
-          <li class="list-group-item">
-            <label for="arquivo4">Arquivo #4 <strong  class="text-danger">(*)</strong></label>
-            <input type="file" class="form-control-file  {{ $errors->has('arquivo4') ? ' is-invalid' : '' }}" id="arquivo4" name="arquivo4">
-            @if ($errors->has('arquivo4'))
-            <div class="invalid-feedback">
-            {{ $errors->first('arquivo4') }}
-            </div>
-            @endif
-          </li>
-          <li class="list-group-item">
-            <label for="arquivo5">Arquivo #5 <strong  class="text-danger">(*)</strong></label>
-            <input type="file" class="form-control-file  {{ $errors->has('arquivo5') ? ' is-invalid' : '' }}" id="arquivo5" name="arquivo5">
-            @if ($errors->has('arquivo5'))
-            <div class="invalid-feedback">
-            {{ $errors->first('arquivo5') }}
-            </div>
-            @endif
-          </li>
-          <li class="list-group-item">
-            <label for="arquivo6">Arquivo #6 <strong  class="text-danger">(*)</strong></label>
-            <input type="file" class="form-control-file  {{ $errors->has('arquivo6') ? ' is-invalid' : '' }}" id="arquivo6" name="arquivo6">
-            @if ($errors->has('arquivo6'))
-            <div class="invalid-feedback">
-            {{ $errors->first('arquivo6') }}
+            {{ $errors->first('arquivos') }}
             </div>
             @endif
           </li>
@@ -260,7 +229,7 @@
         <div class="alert alert-primary" role="alert">
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" name="declaro1" value="s">
-            <label class="form-check-label" for="declaro1"><strong>Declaro ... ... ... ... ...</strong></label>            
+            <label class="form-check-label" for="declaro1">Declaro que estou ciente e de acordo com os <strong>requisitos legais</strong> para obter a titulação municipal de ORGANIZAÇÃO SOCIAL estão dispostos na <strong>Lei Municipal nº 4.713/2014</strong> e respectivo regulamento, <strong>Decreto Municipal nº 151/2017</strong> (com alterações promovidas pelo Decreto Municipal nº 239/2017)</label>            
           </div>    
         </div>
         @if ($errors->has('declaro1'))
