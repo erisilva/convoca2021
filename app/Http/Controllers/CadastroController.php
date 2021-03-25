@@ -106,9 +106,9 @@ class CadastroController extends Controller
         $cpf = preg_replace('/[^0-9]/', '', $input['cpf']);
 
         $local = generateRandomString(20);
-        if ($request->hasFile('arquivo1') && $request->file('arquivo1')->isValid()) {            
-            $nome_arquivo =  $nome . '-' . $cpf . '-experiencia.' . $request->arquivo1->extension();
-            $path = $request->file('arquivo1')->storeAs($local, $nome_arquivo, 'public');
+        if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {            
+            $nome_arquivo =  $nome . '-' . $cpf . '-experiencia.' . $request->arquivo->extension();
+            $path = $request->file('arquivo')->storeAs($local, $nome_arquivo, 'public');
             $url = asset('storage/' . $local . '/' . $nome_arquivo);            
             $input['arquivo1Nome'] =  $nome_arquivo;  
             $input['arquivo1Local'] =  $local;  
